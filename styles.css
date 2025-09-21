@@ -1,0 +1,264 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+    color: #fff;
+}
+
+#gameCanvas {
+    display: block;
+    background-color: #222;
+    cursor: crosshair;
+}
+
+/* Game UI Overlay */
+#gameUI {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.ui-panel {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 12px;
+    pointer-events: auto;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Top Bar */
+#topBar {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0, 100, 200, 0.3), rgba(0, 50, 100, 0.3));
+}
+
+#playerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#playerName {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00ff88;
+}
+
+#playerCoords {
+    font-size: 12px;
+    color: #aaa;
+}
+
+#connectionStatus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#statusIndicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+.status-connected {
+    background-color: #00ff00;
+}
+
+.status-disconnected {
+    background-color: #ff4444;
+}
+
+.status-connecting {
+    background-color: #ffaa00;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Minimap */
+#minimapContainer {
+    top: 90px;
+    right: 15px;
+    width: 220px;
+    background: linear-gradient(135deg, rgba(100, 0, 200, 0.3), rgba(50, 0, 100, 0.3));
+}
+
+#minimapContainer h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+#minimap {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    background: #111;
+}
+
+#minimapToggle {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 24px;
+    height: 24px;
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+/* Player List */
+#playerListContainer {
+    top: 350px;
+    right: 15px;
+    width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: linear-gradient(135deg, rgba(200, 100, 0, 0.3), rgba(100, 50, 0, 0.3));
+}
+
+#playerListContainer h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+#playerList {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.player-item.current-player {
+    background: rgba(0, 255, 136, 0.2);
+    border: 1px solid rgba(0, 255, 136, 0.5);
+}
+
+.player-name {
+    font-weight: bold;
+}
+
+.player-status {
+    font-size: 10px;
+    color: #aaa;
+}
+
+/* Controls */
+#controlsContainer {
+    bottom: 15px;
+    right: 15px;
+    width: 220px;
+    background: linear-gradient(135deg, rgba(0, 200, 100, 0.3), rgba(0, 100, 50, 0.3));
+}
+
+#controlsContainer h3 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+}
+
+.control-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+    font-size: 12px;
+}
+
+.key {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: monospace;
+    font-weight: bold;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.description {
+    color: #ccc;
+}
+
+/* Performance Stats */
+#performanceContainer {
+    bottom: 15px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 12px;
+    font-family: monospace;
+    background: linear-gradient(135deg, rgba(50, 50, 50, 0.8), rgba(30, 30, 30, 0.8));
+}
+
+#performanceContainer > div {
+    padding: 2px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #minimapContainer,
+    #playerListContainer,
+    #controlsContainer {
+        width: 180px;
+    }
+    
+    #topBar {
+        height: 50px;
+        font-size: 14px;
+    }
+    
+    .ui-panel {
+        padding: 8px;
+    }
+}
+
+/* Hide panels when collapsed */
+.minimized {
+    transform: scale(0.8);
+    opacity: 0.6;
+}
+
+.hidden {
+    display: none !important;
+}

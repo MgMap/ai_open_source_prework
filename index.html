@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini MMORPG Client</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <canvas id="gameCanvas"></canvas>
+    
+    <!-- Game UI Overlay -->
+    <div id="gameUI">
+        <!-- Top Bar -->
+        <div id="topBar" class="ui-panel">
+            <div id="playerInfo">
+                <span id="playerName">Connecting...</span>
+                <span id="playerCoords">(0, 0)</span>
+            </div>
+            <div id="connectionStatus">
+                <span id="statusText">Connecting...</span>
+                <div id="statusIndicator" class="status-disconnected"></div>
+            </div>
+        </div>
+        
+        <!-- Minimap -->
+        <div id="minimapContainer" class="ui-panel">
+            <h3>Minimap</h3>
+            <canvas id="minimap" width="200" height="200"></canvas>
+            <div id="minimapToggle">📍</div>
+        </div>
+        
+        <!-- Player List -->
+        <div id="playerListContainer" class="ui-panel">
+            <h3>Players (<span id="playerCount">0</span>)</h3>
+            <div id="playerList"></div>
+        </div>
+        
+        <!-- Controls Help -->
+        <div id="controlsContainer" class="ui-panel">
+            <h3>Controls</h3>
+            <div class="control-item">
+                <span class="key">↑↓←→</span> or <span class="key">WASD</span>
+                <span class="description">Move</span>
+            </div>
+            <div class="control-item">
+                <span class="key">M</span>
+                <span class="description">Toggle Minimap</span>
+            </div>
+            <div class="control-item">
+                <span class="key">Tab</span>
+                <span class="description">Toggle Player List</span>
+            </div>
+        </div>
+        
+        <!-- Performance Stats -->
+        <div id="performanceContainer" class="ui-panel">
+            <div id="fpsCounter">FPS: --</div>
+            <div id="playerCountDisplay">Players: 0</div>
+            <div id="pingDisplay">Ping: --ms</div>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
